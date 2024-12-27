@@ -1,22 +1,24 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
 import { WORKOUTS } from "@/data";
+import { ThemedText } from "./ThemedText";
+import { ThemedView } from "./ThemedView";
 
 const WorkoutList = () => {
   const workouts = WORKOUTS;
 
   return (
-    <View>
+    <ThemedView>
       <FlatList
         data={workouts}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item.name}</Text>
-            <Text>{item.description}</Text>
-          </View>
+          <ThemedView>
+            <ThemedText>{item.name}</ThemedText>
+            <ThemedText>{item.description}</ThemedText>
+          </ThemedView>
         )}
       />
-    </View>
+    </ThemedView>
   );
 };
 
