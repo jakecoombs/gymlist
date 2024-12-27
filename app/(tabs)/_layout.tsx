@@ -20,10 +20,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Workouts",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? "home-sharp" : "home-outline"}
+              name={focused ? "barbell-sharp" : "barbell-outline"}
               color={color}
               size={24}
             />
