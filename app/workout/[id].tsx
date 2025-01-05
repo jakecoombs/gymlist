@@ -3,8 +3,9 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { WORKOUTS } from "@/data";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
+import ExerciseList from "@/components/ExerciseList";
 
 export default function Page() {
   const { id } = useLocalSearchParams();
@@ -20,8 +21,10 @@ export default function Page() {
   return (
     <ThemedView style={styles.container}>
       <Stack.Screen options={{ title: workout.name }} />
-      <ThemedText type="defaultSemiBold">{workout.description}</ThemedText>
-      <ThemedText>Exercises: {workout.exercises.length}</ThemedText>
+      <ThemedText style={{ marginVertical: 10 }} type="defaultSemiBold">
+        {workout.description}
+      </ThemedText>
+      <ExerciseList exercises={workout.exercises} />
     </ThemedView>
   );
 }
