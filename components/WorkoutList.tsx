@@ -1,10 +1,11 @@
 import React from "react";
-import { FlatList, useColorScheme } from "react-native";
+import { FlatList, Pressable, useColorScheme } from "react-native";
 import { StyleSheet } from "react-native";
 import { WORKOUTS } from "@/data";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import { Colors } from "@/constants/Colors";
+import { Link } from "expo-router";
 
 const WorkoutList = () => {
   const workouts = WORKOUTS;
@@ -15,18 +16,24 @@ const WorkoutList = () => {
       <FlatList
         data={workouts}
         renderItem={({ item }) => (
-          <ThemedView
+          <Link
+            href={{
+              pathname: "/workout/[id]",
+              params: { id: item.id },
+            }}
             style={[
               styles.container,
               { borderColor: Colors[colorScheme].text },
             ]}
           >
-            <ThemedText type="defaultSemiBold">{item.name}</ThemedText>
-            <ThemedText type="subtext">{item.description}</ThemedText>
-            <ThemedText type="subtext">
-              Last workout: {item.lastWorkout?.split("T")[0] ?? "N/A"}
-            </ThemedText>
-          </ThemedView>
+            <ThemedView>
+              <ThemedText type="defaultSemiBold">{item.name}</ThemedText>
+              <ThemedText type="subtext">{item.description}</ThemedText>
+              <ThemedText type="subtext">
+                Last workout: {item.lastWorkout?.split("T")[0] ?? "N/A"}
+              </ThemedText>
+            </ThemedView>
+          </Link>
         )}
         keyExtractor={(item) => item.id.toString()}
       />
