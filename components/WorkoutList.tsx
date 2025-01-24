@@ -8,6 +8,7 @@ import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
 
 const WorkoutList = () => {
+  // TODO: Convert to local store
   const workouts = WORKOUTS;
   const colorScheme = useColorScheme() ?? "light";
 

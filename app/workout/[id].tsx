@@ -24,7 +24,10 @@ export default function Page() {
       <ThemedText style={{ marginVertical: 10 }} type="defaultSemiBold">
         {workout.description}
       </ThemedText>
-      <ExerciseList exercises={workout.exercises} />
+      <ExerciseList
+        exercises={workout.exercises}
+        parentWorkoutId={workout.id}
+      />
     </ThemedView>
   );
 }

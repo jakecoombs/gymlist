@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { useColorScheme } from "react-native";
 import { StyleSheet } from "react-native";
-import { Exercise } from "@/data";
+import { Exercise } from "@/types";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import { Colors } from "@/constants/Colors";
 import Checkbox from "expo-checkbox";
+import SetCheckboxes from "./SetCheckboxes";
 
-const ExerciseItem = (item: Exercise) => {
+interface IExerciseItemProps {
+  item: Exercise;
+  parentWorkoutId: number;
+}
+
+const ExerciseItem = ({ item, parentWorkoutId }: IExerciseItemProps) => {
   const colorScheme = useColorScheme() ?? "light";
-
-  const [sets, setSets] = useState(Array(item.sets).fill(false));
 
   return (
     <ThemedView
@@ -18,18 +22,7 @@ const ExerciseItem = (item: Exercise) => {
     >
       <ThemedText type="defaultSemiBold">{item.name}</ThemedText>
       <ThemedText type="subtext">{item.description}</ThemedText>
-      <ThemedView style={styles.checkboxContainer}>
-        {sets.map((value, index) => (
-          <Checkbox
-            key={index}
-            value={value}
-            onValueChange={(newValue) => {
-              sets[index] = newValue;
-              setSets([...sets]);
-            }}
-          />
-        ))}
-      </ThemedView>
+      <SetCheckboxes workoutId={parentWorkoutId} exercise={item} />
     </ThemedView>
   );
 };

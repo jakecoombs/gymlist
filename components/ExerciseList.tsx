@@ -1,23 +1,24 @@
 import React from "react";
 import { FlatList } from "react-native";
-import { Exercise, EXERCISES } from "@/data";
+import { Exercise } from "@/types";
 import { ThemedText } from "./ThemedText";
 import { ThemedView } from "./ThemedView";
 import ExerciseItem from "./ExerciseItem";
 
 interface IExerciseListProps {
-  exercises?: Exercise[];
+  exercises: Exercise[];
+  parentWorkoutId: number;
 }
 
-const ExerciseList = ({ exercises }: IExerciseListProps) => {
-  const exerciseData = exercises ?? EXERCISES;
-
+const ExerciseList = ({ exercises, parentWorkoutId }: IExerciseListProps) => {
   return (
     <ThemedView>
-      <ThemedText type="subtitle">Exercises ({exerciseData.length})</ThemedText>
+      <ThemedText type="subtitle">Exercises ({exercises.length})</ThemedText>
       <FlatList
-        data={exerciseData}
-        renderItem={({ item }) => <ExerciseItem {...item} />}
+        data={exercises}
+        renderItem={({ item }) => (
+          <ExerciseItem item={item} parentWorkoutId={parentWorkoutId} />
+        )}
         keyExtractor={(item) => item.id.toString()}
       />
     </ThemedView>
